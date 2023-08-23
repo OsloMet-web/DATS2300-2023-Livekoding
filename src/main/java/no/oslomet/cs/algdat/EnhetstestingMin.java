@@ -1,6 +1,6 @@
 package no.oslomet.cs.algdat;
 
-public class Livekoding {
+public class EnhetstestingMin {
     public static void main(String[] args) {
         System.out.println("Hello AlgDat!");
     }

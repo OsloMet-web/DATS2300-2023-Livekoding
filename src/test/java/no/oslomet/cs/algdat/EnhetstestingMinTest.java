@@ -6,26 +6,26 @@ import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LivekodingTest {
+class EnhetstestingMinTest {
 
     @Test
     void minTomTabell() {
         int[] tom = {};
-        assertThrows(NoSuchElementException.class, () -> Livekoding.min(tom));
+        assertThrows(NoSuchElementException.class, () -> EnhetstestingMin.min(tom));
     }
 
     @Test
     void minEttElement() {
         int[] a = {5};
-        assertDoesNotThrow(() -> Livekoding.min(a), "Fikk feilmelding på tabell med ett element.");
-        assertEquals(0, Livekoding.min(a), "Fikk ikke null. Forventet null.");
+        assertDoesNotThrow(() -> EnhetstestingMin.min(a), "Fikk feilmelding på tabell med ett element.");
+        assertEquals(0, EnhetstestingMin.min(a), "Fikk ikke null. Forventet null.");
     }
 
     @Test
     void minTabellEndresIkke() {
         int[] a = {1, 4, 7, 4, 1, 5, 2};
         int[] b = a.clone();
-        Livekoding.min(a);
+        EnhetstestingMin.min(a);
         assertArrayEquals(b, a, "Dette endret på tabellen.");
     }
 }
