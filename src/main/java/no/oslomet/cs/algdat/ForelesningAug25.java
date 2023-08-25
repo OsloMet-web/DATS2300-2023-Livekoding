@@ -20,7 +20,7 @@ public class ForelesningAug25 {
     }
 
     public static void sorter(int[] a) {
-        for (i = a.length, i > 0; --i) {
+        for (int i = a.length; i > 0; --i) {
             int maksindeks = maks(a, 0, i);
             bytt(a, maksindeks, i-1);
         }
