@@ -31,7 +31,8 @@ public class Binærtre {
         char[] sortedList = new char[this.length];
         // Idé: Be hver node om å legge inn sin verdi, og øke telleren
         // som holder styr på hvor langt vi har kommet. Gå først til venstre.
-        throw new ExecutionControl.NotImplementedException("Gadd ikke lage denne ferdig.");
+        //throw new ExecutionControl.NotImplementedException("Gadd ikke lage denne ferdig.");
+        throw new UnsupportedOperationException("Gadd ikke lage denne ferdig.");
     }
 }
 
