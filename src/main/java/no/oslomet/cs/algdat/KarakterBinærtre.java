@@ -1,13 +1,14 @@
 package no.oslomet.cs.algdat;
+import java.util.*;
 
 public class KarakterBinærtre {
     KarakterNode root;
     int length;
 
     public static void main(String[] args) {
-        char[] cList = {'e', 'a', 'o', 'v'};
+        char[] cList = {'e', 'a', 'o', 'v', 'w', 'A', 'æ', 'ø', 'å'};
         KarakterBinærtre btre = KarakterBinærtre.fromList(cList);
-        System.out.println(btre.root.rightChild.value);
+        System.out.println(Arrays.toString(btre.toSortedList()));
     }
 
     public KarakterBinærtre() {
@@ -35,8 +36,8 @@ public class KarakterBinærtre {
         char[] sortedList = new char[this.length];
         // Idé: Be hver node om å legge inn sin verdi, og øke telleren
         // som holder styr på hvor langt vi har kommet. Gå først til venstre.
-        //throw new ExecutionControl.NotImplementedException("Gadd ikke lage denne ferdig.");
-        throw new UnsupportedOperationException("Gadd ikke lage denne ferdig.");
+        root.toSortedList(sortedList, 0);
+        return sortedList;
     }
 }
 
@@ -65,5 +66,17 @@ class KarakterNode {
                 rightChild.append(c);
             }
         }
+    }
+
+    public int toSortedList(char[] sortedList, int i) {
+        int counter = i;
+        if (leftChild != null) {
+            counter = leftChild.toSortedList(sortedList, counter);
+        }
+        sortedList[counter++] = value;
+        if(rightChild != null) {
+            counter = rightChild.toSortedList(sortedList, counter);
+        }
+        return counter;
     }
 }
