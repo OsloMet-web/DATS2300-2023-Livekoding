@@ -1,7 +1,6 @@
 package no.oslomet.cs.algdat;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class Binærtre<T> {
@@ -90,5 +89,107 @@ public class Binærtre<T> {
         dybdetraversering(node.venstre, konsument);
         dybdetraversering(node.høyre, konsument);
         konsument.accept(node.verdi);
+    }
+}
+
+class SøkeBinærTre<T> implements Iterable<T>{
+
+    public static void main(String[] args) {
+        SøkeBinærTre<Integer> sbt = new SøkeBinærTre<>(Comparator.naturalOrder());
+
+        Integer[] intList = {5, 3, 4, 9, 7, 2, 8, 6, 6, 10, 9};
+        for (Integer i : intList) {
+            sbt.leggInn(i);
+        }
+        for (Integer i : sbt) {
+            System.out.println(i);
+        }
+    }
+    private class Node {
+        Node venstre;
+        Node høyre;
+        T verdi;
+
+        public Node(T verdi) {
+            this.verdi = verdi; venstre = null; høyre = null;
+        }
+
+        public Node(T verdi, Node venstre, Node høyre) {
+            this.verdi = verdi; this.venstre = venstre; this.høyre = høyre;
+        }
+    }
+    Node rot;
+    int antall;
+    Comparator<? super T> sammenlikner;
+
+    public SøkeBinærTre(Comparator <? super T> sammenlikner) {
+        rot = null;
+        antall = 0;
+        this.sammenlikner = sammenlikner;
+    }
+
+    public boolean leggInn(T verdi) {
+        Objects.requireNonNull(verdi);
+        Node p = rot;
+        Node q = null;
+        while (p != null) {
+            if (sammenlikner.compare(verdi, p.verdi) < 0) {
+                q = p;
+                p = p.venstre;
+            } else {
+                q = p;
+                p = p.høyre;
+            }
+        }
+        p = new Node(verdi);
+        if (q == null) {
+            rot = p; return true;
+        }
+        if (sammenlikner.compare(verdi, q.verdi) < 0) {
+            q.venstre = p;
+        } else {
+            q.høyre = p;
+        }
+        return true;
+    }
+
+    public Iterator<T> iterator() {
+        return new SBTIterator();
+    }
+
+    private class SBTIterator implements Iterator<T> {
+        Deque<Node> stack;
+        Node p;
+
+        public SBTIterator() {
+            stack = new ArrayDeque<>();
+            p = rot;
+            if (p == null) return;
+            while (p.venstre != null) {
+                stack.addFirst(p);
+                p = p.venstre;
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return p != null;
+        }
+
+        @Override
+        public T next() {
+            T verdi = p.verdi;
+            if (p.høyre != null) {
+                p = p.høyre;
+                while (p.venstre != null) {
+                    stack.addFirst(p);
+                    p = p.venstre;
+                }
+            } else {
+                if (stack.isEmpty()) p = null;
+                else p = stack.removeFirst();
+            }
+            return verdi;
+        }
     }
 }
