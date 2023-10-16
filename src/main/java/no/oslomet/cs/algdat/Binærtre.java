@@ -143,13 +143,14 @@ class SøkeBinærTre<T> implements Iterable<T>{
         }
         p = new Node(verdi);
         if (q == null) {
-            rot = p; return true;
+            rot = p; antall++; return true;
         }
         if (sammenlikner.compare(verdi, q.verdi) < 0) {
             q.venstre = p;
         } else {
             q.høyre = p;
         }
+        antall++;
         return true;
     }
 
