@@ -1,6 +1,5 @@
 package no.oslomet.cs.algdat;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Objects;
