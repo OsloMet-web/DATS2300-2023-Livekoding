@@ -7,14 +7,9 @@ import java.util.Random;
 
 public class BalanserendeTre {
     public static void main(String[] args) {
-        RSTreBoka<Integer> rstreint = new RSTreBoka<>(Comparator.naturalOrder());
-        int[] iList = {2, 14, 13, 0, 6, 5, 11, 12, 7, 10, 8, 9, 1, 3, 4};
-        for (int i : iList) {
-            rstreint.leggInnRekursiv(i);
-        }
-
         int n = 1_000_000;
-        iList = randPerm(n);
+        RSTreBoka<Integer> rstreint = new RSTreBoka<>(Comparator.naturalOrder());
+        int[] iList = randPerm(n);
         long tic = System.currentTimeMillis();
         for (int i : iList) {
             rstreint.leggInnIterativ(i);
